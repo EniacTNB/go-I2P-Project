@@ -69,10 +69,7 @@ func DeleteArticle(id int) bool {
 func ExistArticleByID(id int) bool {
 	var article Article
 	db.Select("id").Where("id = ?", id).First(&article)
-	if article.ID > 0 {
-		return true
-	}
-	return false
+	return article.ID > 0
 }
 
 func GetArticleTotal(maps interface{}) (count int) {

@@ -3,7 +3,7 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
 
       <div class="title-container">
-        <h3 class="title">登 录</h3>
+        <h3 class="title">I2P 节点数据分析系统</h3>
       </div>
 
       <el-form-item prop="username">
@@ -40,13 +40,24 @@
           <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
         </span>
       </el-form-item>
-
+      <div>
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
+      
+      <!-- <el-button :loading="loading"  style="width:100%;margin-bottom:20px;" @click.native.prevent="handleLogin">Register</el-button> -->
+      <!-- <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">ForgetPassword</el-button> -->
 
       <div class="tips">
-        <span style="margin-right:20px;">username: admin</span>
-        <span> password: 111111</span>
+        <span style="margin-right:20px;">忘记密码？</span>
+        
+        <!-- <span> password: 111111</span> -->
       </div>
+      <div class="tips">
+        
+        <span style="margin-right:20px;">没有账号？请注册</span>
+        <!-- <span> password: 111111</span> -->
+      </div>
+      </div>
+      
 
     </el-form>
   </div>
@@ -119,8 +130,8 @@ export default {
 /* 修复input 背景不协调 和光标变色 */
 /* Detail see https://github.com/PanJiaChen/vue-element-admin/pull/927 */
 
-$bg:#283443;
-$light_gray:#fff;
+$bg:#fff;
+$light_gray:#283443;
 $cursor: #fff;
 
 @supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
@@ -163,8 +174,8 @@ $cursor: #fff;
 </style>
 
 <style lang="scss" scoped>
-$bg:#2d3a4b;
-$dark_gray:#889aa4;
+$bg:rgb(167, 167, 167);
+$dark_gray:#283443;
 $light_gray:#eee;
 
 .login-container {

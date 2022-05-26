@@ -39,3 +39,20 @@ new Vue({
   store,
   render: h => h(App)
 })
+import VueCodeMirror from 'vue-codemirror'
+import 'codemirror/lib/codemirror.css'
+Vue.use(VueCodeMirror)
+
+import ProgressBar from 'vuejs-progress-bar'
+Vue.use(ProgressBar)
+
+//在main.js中引入
+
+
+// import Echarts from 'vue-echarts'
+// import 'echarts/lib/chart/line'
+
+// Vue.component('chart', Echarts)
+
+import echarts from "echarts"
+Vue.prototype.$echarts = echarts

@@ -36,6 +36,28 @@ export const constantRoutes = [
     component: () => import('@/views/login/index'),
     hidden: true
   },
+  {
+    path: '/register',
+    component: Layout,
+    hidden: true,
+    children: [{
+      path: 'register',
+      name: 'register',
+      component: () => import('@/views/register/index'),
+      meta: { title: 'I2P仪表盘', icon: 'dashboard' }
+    }]
+  },
+  {
+    path: '/detail',
+    component: Layout,
+    // hidden: true,
+    children: [{
+      path: 'detail',
+      name: 'detail',
+      component: () => import('@/views/form/experdetail'),
+      meta: { title: 'detail', icon: 'dashboard' }
+    }]
+  },
 
   {
     path: '/404',
@@ -48,6 +70,19 @@ export const constantRoutes = [
     component: () => import('@/views/403'),
     hidden: true
   },
+  // {
+  //   path: '/metadata',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'metadata',
+  //       name: 'Metadata',
+  //       component: () => import('@/views/metadata/index'),
+  //       meta: { title: 'I2P仪表盘', icon: 'dashboard' }
+  //     }
+  //   ],
+  //   // hidden: true
+  // },
 
   {
     path: '/',
@@ -57,7 +92,7 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      meta: { title: 'I2P仪表盘', icon: 'dashboard' }
     }]
   },
 
@@ -66,33 +101,98 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/example/table',
     name: 'Example',
-    meta: { title: 'Example', icon: 'example' },
+    meta: { title: '元数据', icon: 'example' },
     children: [
       {
         path: 'table',
         name: 'Table',
         component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
+        meta: { title: '节点元数据', icon: 'table' }
       },
       {
         path: 'tree',
         name: 'Tree',
         component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
+        meta: { title: 'Tree', icon: 'tree' },
+        hidden: true
       }
+    ]
+  },
+  {
+    path: '/view',
+    component: Layout,
+    redirect: '/view/table',
+    name: 'View',
+    meta: { title: '定制可视化', icon: 'example' },
+    children: [
+      {
+        path: 'table',
+        name: 'Table',
+        component: () => import('@/views/viewers/index'),
+        meta: { title: '可视化定制', icon: 'example' }
+      },
+    ]
+  },
+  {
+    path: '/pcap',
+    component: Layout,
+    redirect: '/pcap/analyser',
+    name: 'View',
+    meta: { title: '流量数据分析', icon: 'example' },
+    children: [
+      {
+        path: 'pcap',
+        name: 'pcap',
+        component: () => import('@/views/pcapAnalyser/index'),
+        meta: { title: 'Pcap-Analyser', icon: 'pdf' }
+      },
+      {
+        path: 'pcap_metadata',
+        name: 'metadata',
+        component: () => import('@/views/pcapAnalyser/index_meta'),
+        meta: { title: 'Pcap-Metadata', icon: 'pdf' }
+      },
+      {
+        path: 'pcap_proto',
+        name: 'proto',
+        component: () => import('@/views/pcapAnalyser/index_proto'),
+        meta: { title: 'Pcap-Proto', icon: 'pdf' }
+      },
+      {
+        path: 'pcap_flow',
+        name: 'flow',
+        component: () => import('@/views/pcapAnalyser/index_flow'),
+        meta: { title: 'Pcap-Flow', icon: 'pdf' }
+      },
+      {
+        path: 'pcap_map',
+        name: 'map',
+        component: () => import('@/views/pcapAnalyser/index_pcap_map'),
+        meta: { title: 'Pcap-Map', icon: 'pdf' }
+      },
     ]
   },
 
   {
     path: '/form',
     component: Layout,
+    redirect: '/form/index',
+    meta: { title: '实验分析', icon: 'form' },
+    name: 'LabNested',
     children: [
       {
         path: 'index',
         name: 'Form',
+        component: () => import('@/views/form/experlist'),
+        meta: { title: '实验列表', icon: 'form' },
+      },
+      {
+        path: 'newExper',
+        name: 'exper',
         component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
-      }
+        meta: { title: '新增实验', icon: 'form' },
+      },
+
     ]
   },
 
@@ -102,57 +202,93 @@ export const constantRoutes = [
     redirect: '/nested/menu1',
     name: 'Nested',
     meta: {
-      title: 'Nested',
+      title: 'probe',
       icon: 'nested'
     },
     children: [
       {
         path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
+        component: () => import('@/views/probe/index'), // Parent router-view
         name: 'Menu1',
-        meta: { title: 'Menu1' },
-        children: [
-          {
-            path: 'menu1-1',
-            component: () => import('@/views/nested/menu1/menu1-1'),
-            name: 'Menu1-1',
-            meta: { title: 'Menu1-1' }
-          },
-          {
-            path: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2'),
-            name: 'Menu1-2',
-            meta: { title: 'Menu1-2' },
-            children: [
-              {
-                path: 'menu1-2-1',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-                name: 'Menu1-2-1',
-                meta: { title: 'Menu1-2-1' }
-              },
-              {
-                path: 'menu1-2-2',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-                name: 'Menu1-2-2',
-                meta: { title: 'Menu1-2-2' }
-              }
-            ]
-          },
-          {
-            path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
-            name: 'Menu1-3',
-            meta: { title: 'Menu1-3' }
-          }
-        ]
+        meta: { title: '探针管理' },
       },
-      {
-        path: 'menu2',
-        component: () => import('@/views/nested/menu2/index'),
-        meta: { title: 'menu2' }
-      }
     ]
   },
+  {
+    path: '/nested',
+    component: Layout,
+    redirect: '/nested/menu1',
+    name: 'Nested',
+    meta: {
+      title: 'Exper',
+      icon: 'nested'
+    },
+    children: [
+      {
+        path: 'menu12',
+        component: () => import('@/views/Exper/index2'), // Parent router-view
+        name: 'Menu1',
+        meta: { title: 'Exper' },
+      },
+    ]
+  },
+  // {
+  //   path: '/nested',
+  //   component: Layout,
+  //   redirect: '/nested/menu1',
+  //   name: 'Nested',
+  //   meta: {
+  //     title: 'probe',
+  //     icon: 'nested'
+  //   },
+  //   children: [
+  //     {
+  //       path: 'menu1',
+  //       component: () => import('@/views/nested/menu1/index'), // Parent router-view
+  //       name: 'Menu1',
+  //       meta: { title: 'Menu1' },
+  //       children: [
+  //         {
+  //           path: 'menu1-1',
+  //           component: () => import('@/views/nested/menu1/menu1-1'),
+  //           name: 'Menu1-1',
+  //           meta: { title: 'Menu1-1' }
+  //         },
+  //         {
+  //           path: 'menu1-2',
+  //           component: () => import('@/views/nested/menu1/menu1-2'),
+  //           name: 'Menu1-2',
+  //           meta: { title: 'Menu1-2' },
+  //           children: [
+  //             {
+  //               path: 'menu1-2-1',
+  //               component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
+  //               name: 'Menu1-2-1',
+  //               meta: { title: 'Menu1-2-1' }
+  //             },
+  //             {
+  //               path: 'menu1-2-2',
+  //               component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
+  //               name: 'Menu1-2-2',
+  //               meta: { title: 'Menu1-2-2' }
+  //             }
+  //           ]
+  //         },
+  //         {
+  //           path: 'menu1-3',
+  //           component: () => import('@/views/nested/menu1/menu1-3'),
+  //           name: 'Menu1-3',
+  //           meta: { title: 'Menu1-3' }
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       path: 'menu2',
+  //       component: () => import('@/views/nested/menu2/index'),
+  //       meta: { title: 'menu2' }
+  //     }
+  //   ]
+  // },
 
   {
     path: 'external-link',

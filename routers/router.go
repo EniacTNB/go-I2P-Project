@@ -9,6 +9,7 @@ import (
 	"gin-vue/pkg/setting"
 	v1 "gin-vue/routers/api/v1"
 	v2 "gin-vue/routers/api/v2"
+	i2p "gin-vue/routers/i2p"
 )
 
 func InitRouter() *gin.Engine {
@@ -63,6 +64,25 @@ func InitRouter() *gin.Engine {
 		apiv1.PUT("/articles/:id", v1.EditArticle)
 		//删除指定文章
 		apiv1.DELETE("/articles/:id", v1.DeleteArticle)
+	}
+
+	apiI2p := r.Group("/api/i2p")
+	apiI2p.Use()
+	{
+		apiI2p.GET("filelists", i2p.GetFileList)
+		apiI2p.GET("filecontent", i2p.GetFileContent)
+		apiI2p.POST("saveluafile", i2p.SaveLuaFile)
+		apiI2p.POST("runExper", i2p.RunLuaFile)
+		apiI2p.GET("testKafkaParse", i2p.KafkaConsumeSample)
+		apiI2p.GET("metadata", i2p.GetMetaData)
+		apiI2p.GET("metadata_content", i2p.GetMetaDataContent)
+		apiI2p.GET("exper/list", i2p.GetExperList)
+		apiI2p.GET("exper/filecontent", i2p.GetFileContent)
+		apiI2p.GET("exper/getLog", i2p.GetDockerLogs)
+		apiI2p.GET("exper/getDockerState", i2p.GetDockerStateTest)
+		apiI2p.GET("exper/getFileChange", i2p.GetNetDbChangeInDocker)
+		apiI2p.GET("exper/getFileList", i2p.GetNetDbFileList)
+
 	}
 
 	var testMiddleware = myjwt.GinJWTMiddlewareInit(&myjwt.TestAuthorizator{})

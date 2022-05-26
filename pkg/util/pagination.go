@@ -1,6 +1,8 @@
 package util
 
 import (
+	"os"
+
 	"github.com/gin-gonic/gin"
 	"github.com/unknwon/com"
 
@@ -15,4 +17,11 @@ func GetPage(c *gin.Context) int {
 	}
 
 	return result
+}
+
+func CheckFileExist(filename string) bool {
+	if _, err := os.Stat(filename); os.IsNotExist(err) {
+		return false
+	}
+	return true
 }

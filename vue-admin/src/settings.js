@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: 'Vue Admin Template',
+  title: 'I2P Analyser',
 
   /**
    * @type {boolean} true | false
